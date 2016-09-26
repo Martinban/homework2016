@@ -35,6 +35,7 @@ rm(list = ls())
 q()
 # to get a clean fresh start
 ```
+
 Data frames package related variables neatly together,
 keeping them in sync vis-a-vis row order
 applying any filtering of observations uniformly.
@@ -42,10 +43,44 @@ Most functions for inference, modelling, and graphing are happy to be passed a d
 The set of packages known as the tidyverse takes this one step further and explicitly prioritizes the processing of data frames. This includes popular packages like dplyr and ggplot2. In fact the tidyverse prioritizes a special flavor of data frame, called a “tibble.”
 # 
 ```{r}
-library(gapminder)
-str(gapminder)
 
 ```
-str() will provide a sensible description
+
+```{r}
+library(gapminder)
+library(tibble)
+library(tidyverse)
+str(gapminder)
+class(gapminder)
+head(gapminder)
+tail(gapminder)
+as_tibble(iris)
+names(gapminder)
+ncol(gapminder)
+length(gapminder)
+dim(gapminder)
+nrow(gapminder)
+summary(gapminder)
+plot(lifeExp ~ year, gapminder)plot(lifeExp ~ log(gdpPercap), gapminder)
+hist(gapminder$lifeExp)
+```
+```{r}
+summary(gapminder$year)
+table(gapminder$year)
+barplot(table(gapminder$continent))
+## we exploit the fact that ggplot2 was installed and loaded via the tidyverse
+p <- ggplot(filter(gapminder, continent != "Oceania"),
+            aes(x = gdpPercap, y = lifeExp)) # just initializes
+p <- p + scale_x_log10() # log the x axis the right way
+p + geom_point() # scatterplot
+p + geom_point(aes(color = continent)) # map continent to color
+p + geom_point(alpha = (1/3), size = 3) + geom_smooth(lwd = 3, se = FALSE)
+p + geom_point(alpha = (1/3), size = 3) + facet_wrap(~ continent) +
+  geom_smooth(lwd = 1.5, se = FALSE)
+
+```
+
+
+
 
 
