@@ -27,6 +27,7 @@ You can also embed plots, for example:
 plot(pressure)
 ```
 
+
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 ```{r}
 getwd()
@@ -34,4 +35,17 @@ rm(list = ls())
 q()
 # to get a clean fresh start
 ```
+Data frames package related variables neatly together,
+keeping them in sync vis-a-vis row order
+applying any filtering of observations uniformly.
+Most functions for inference, modelling, and graphing are happy to be passed a data frame via a data = argument. This has been true in base R for a long time.
+The set of packages known as the tidyverse takes this one step further and explicitly prioritizes the processing of data frames. This includes popular packages like dplyr and ggplot2. In fact the tidyverse prioritizes a special flavor of data frame, called a “tibble.”
+# 
+```{r}
+library(gapminder)
+str(gapminder)
+
+```
+str() will provide a sensible description
+
 
